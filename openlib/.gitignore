@@ -1,0 +1,24 @@
+# Model ckpt
+outputs/*
+
+
+# IDE
+.vscode
+.idea
+
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Misc
+.DS_Store
+
+# logs
+wandb/
+lightning_logs/
+
+# Ignore vim files:
+*~
+*.swp
+*.swo
