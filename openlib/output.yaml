@@ -1,0 +1,66 @@
+data:
+  batch_size: 32
+  data_path: data
+  dataset: dataset
+  known_cls_ratio: known_cls_ratio
+  labeled_ratio: 1.0
+  max_seq_len: 45
+  model_name_or_path: model_name_or_path
+  num_workers: 8
+model:
+  class_path: default.FeatureExtractor.FeatureExtractor
+  init_args:
+    dropout_prob: 0.3
+    lr: 1.0e-05
+    model_name_or_path: model_name_or_path
+    scheduler_type: linear
+    warmup_steps: 0
+    weight_decay: 0.01
+trainer:
+  accelerator: auto
+  accumulate_grad_batches: 1
+  barebones: false
+  benchmark: null
+  callbacks:
+  - class_path: lightning.pytorch.callbacks.EarlyStopping
+    init_args:
+      mode: &id001 !!python/name:builtins.max ''
+      monitor: val_acc
+      patience: 3
+  - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+    init_args:
+      dirpath: outputs
+      filename: fe
+      mode: *id001
+      monitor: val_acc
+      save_top_k: 1
+  - class_path: lightning.pytorch.callbacks.RichProgressBar
+  check_val_every_n_epoch: 1
+  default_root_dir: null
+  detect_anomaly: false
+  deterministic: null
+  devices:
+  - 1
+  enable_checkpointing: null
+  enable_model_summary: null
+  enable_progress_bar: null
+  fast_dev_run: false
+  gradient_clip_algorithm: null
+  gradient_clip_val: null
+  inference_mode: true
+  log_every_n_steps: null
+  logger: null
+  max_epochs: 30
+  max_steps: -1
+  min_epochs: null
+  num_nodes: 1
+  num_sanity_val_steps: null
+  overfit_batches: 0.0
+  plugins: null
+  precision: 32-true
+  profiler: null
+  reload_dataloaders_every_n_epochs: 0
+  strategy: ddp_find_unused_parameters_true
+  sync_batchnorm: false
+  use_distributed_sampler: true
+  val_check_interval: null

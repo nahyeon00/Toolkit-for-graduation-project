@@ -1,0 +1,7 @@
+Method,Model name or path,Dataset,Known cls ratio,Max epoch
+ADB,bert-base-uncased,stackoverflow,0.25,1
+KNN-contrastive learning,bert-base-uncased,stackoverflow,0.25,1
+ADB,roberta-base,stackoverflow,0.5,1
+K+1,bert-base-uncased,stackoverflow,0.25,1
+KNN-contrastive learning,bert-base-uncased,stackoverflow,0.5,1
+KNN-contrastive learning,bert-base-uncased,stackoverflow,0.75,1

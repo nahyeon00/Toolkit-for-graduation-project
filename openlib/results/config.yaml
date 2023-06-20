@@ -1,0 +1,72 @@
+data:
+  batch_size: 64
+  data_path: data
+  dataset: stackoverflow
+  k_1: true
+  known_cls_ratio: 0.25
+  labeled_ratio: 1.0
+  max_seq_len: 45
+  model_name_or_path: bert-base-uncased
+  num_workers: 8
+model:
+  class_path: K_1_way.K_1_way.K_1_way
+  init_args:
+    dropout_prob: 0.1
+    freeze: false
+    lr: 2.0e-05
+    model_name_or_path: bert-base-uncased
+    scheduler_type: linear
+    tsne_path: ./tsne/K+1_bert-base-uncased_stackoverflow_0.25_1
+    warmup_steps: 0.1
+    weight_decay: 0.0
+project:
+  path: ./csv/K+1_bert-base-uncased_stackoverflow_0.25_1.csv
+trainer:
+  accelerator: auto
+  accumulate_grad_batches: 1
+  barebones: false
+  benchmark: null
+  callbacks:
+  - class_path: lightning.pytorch.callbacks.EarlyStopping
+    init_args:
+      mode: max
+      monitor: val_acc
+      patience: 10
+  - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+    init_args:
+      dirpath: outputs
+      filename: K+1_bert-base-uncased_stackoverflow_0.25_1
+      mode: max
+      monitor: val_acc
+      save_top_k: 1
+  - class_path: lightning.pytorch.callbacks.RichProgressBar
+  check_val_every_n_epoch: 1
+  default_root_dir: results
+  detect_anomaly: false
+  deterministic: null
+  devices:
+  - 0
+  enable_checkpointing: null
+  enable_model_summary: null
+  enable_progress_bar: null
+  fast_dev_run: false
+  gradient_clip_algorithm: null
+  gradient_clip_val: 0.25
+  inference_mode: true
+  log_every_n_steps: null
+  logger: null
+  max_epochs: 1
+  max_steps: -1
+  min_epochs: null
+  num_nodes: 1
+  num_sanity_val_steps: null
+  overfit_batches: 0.0
+  plugins: null
+  precision: 32-true
+  profiler: null
+  reload_dataloaders_every_n_epochs: 0
+  strategy: ddp_find_unused_parameters_true
+  sync_batchnorm: false
+  use_distributed_sampler: true
+  val_check_interval: null
+seed: '0'
